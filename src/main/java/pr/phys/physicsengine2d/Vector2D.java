@@ -22,7 +22,11 @@ public class Vector2D {
         return new Vector2D(this.x-v2.x,this.y-v2.y);
     }
 
-    public Vector2D multiply(Vector2D v2){
+    public Vector2D multiplyScalar(double scalar){
+        return new Vector2D(this.x*scalar,this.y*scalar);
+    }
+
+    public Vector2D multiplyElementWise(Vector2D v2){
         return new Vector2D(this.x*v2.x,this.y*v2.y);
     }
 
