@@ -41,4 +41,13 @@ public class Vector2D {
         }
         return new Vector2D(x / mag, y / mag);
     }
+
+    public double dot(Vector2D v2){
+        return x*v2.x+y*v2.y;
+    }
+
+    @Override
+    public String toString(){
+        return String.format("Vector(%.2f,%.2f)",x,y);
+    }
 }
