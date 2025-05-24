@@ -17,7 +17,7 @@ This is a WIP 2D physics engine written in Java (planned JavaFX UI)
   - Steps the simulation forward in time
 - **Visualization**:
   - Click to Spawn Object
-  - Double Click to Apply Custom Force
+  - Double Click and drag to Apply Custom Force
   - Arrow to force direction
   - Label using arbitrary units for force
   - Coordinate Axis
