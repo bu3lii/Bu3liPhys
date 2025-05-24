@@ -21,11 +21,12 @@ public void addObject(PhysicsObject obj){
     }
 }
 
-public void step(double dt){
+public void step(double dt, PhysicsObject frozen, boolean isDragging){
     if(dt<0){
         throw new IllegalArgumentException("Time step cannot be less than zero");
     }
     for(PhysicsObject obj : objects){
+        if(isDragging && obj==frozen) continue;
         obj.applyForce(gravity.multiplyScalar(obj.getMass()));
         obj.update(dt);
     }
