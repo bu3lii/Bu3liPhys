@@ -6,6 +6,9 @@ Represents a physical object in the 2D simulation
 The class implements very basic mechanics using semi implicit euler integration
  */
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PhysicsObject {
     private Vector2D position;
     private Vector2D velocity;
