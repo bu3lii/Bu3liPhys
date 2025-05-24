@@ -15,22 +15,28 @@ This is a WIP 2D physics engine written in Java (planned JavaFX UI)
   - Manages a list of physics objects
   - Applies gravity
   - Steps the simulation forward in time
+- **Visualization**:
+  - Click to Spawn Object
+  - Double Click to Apply Custom Force
+  - Arrow to force direction
+  - Label using arbitrary units for force
+  - Coordinate Axis
 
 ## Not Yet Implemented
-- Graphical UI
-- Physics Visualization
+- **COLLISIONS**
 - Big Chunk of Mechanics
 - All of Electromagnetism
 
 ## Status
-No UI, just mechanics and math under the hood.
 VERY early WIP
 
 ## To Do
-- Start building interactive UI (JavaFX)
-- Add collision physics
-- Add object path tracing
+- Polish UI and Visualization
+- Add Collision Logic
 - Implement more Mechanics
 
-# Code is in
+## Code is in
 src/main/java/pr/phys/physicsengine2d
+Main Class: **HelloApplication.java**
+
+*There is no executable yet because this is a very early version*
