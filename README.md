@@ -1,7 +1,7 @@
 
 # Java 2D Physics Engine (WIP)
 
-This is a WIP 2D physics engine written in Java (planned JavaFX UI)
+This is a WIP 2D physics engine written in Java 
 
 ## Features So Far
 - **Vector2D class**: Basic vector math (add, scale, etc.)
