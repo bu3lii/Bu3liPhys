@@ -1,10 +1,10 @@
 
-# Java 2D Physics Engine (WIP)
+# Java 2D Physics Engine
 
 This is a WIP 2D physics engine written in Java (planned JavaFX UI)
 
 ## Features So Far
-- **Vector2D class**: Basic vector math (add, scale, etc.)
+- **Vector2D class**: Basic vector math
 - **PhysicsObject class**: Represents physical objects with:
   - Mass
   - Position
@@ -15,6 +15,8 @@ This is a WIP 2D physics engine written in Java (planned JavaFX UI)
   - Manages a list of physics objects
   - Applies gravity
   - Steps the simulation forward in time
+  - Window Border Collisions
+  - Object to Object Collisions (Early Implementation)
 - **Visualization**:
   - Click to Spawn Object
   - Double Click and drag to Apply Custom Force
@@ -23,7 +25,6 @@ This is a WIP 2D physics engine written in Java (planned JavaFX UI)
   - Coordinate Axis
 
 ## Not Yet Implemented
-- **COLLISIONS**
 - Big Chunk of Mechanics
 - All of Electromagnetism
 
@@ -32,7 +33,8 @@ VERY early WIP
 
 ## To Do
 - Polish UI and Visualization
-- Add Collision Logic
+- Polish Collision Logic
+      Currently, objects that collide simply slide off of each other rather than bouncing off 
 - Implement more Mechanics
 
 ## Code is in
