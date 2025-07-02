@@ -14,6 +14,7 @@ public class PhysicsObject {
     private Vector2D velocity;
     private Vector2D acceleration;
     private double mass;
+    private double radius;
     private boolean frozen = false;
     private final List<Vector2D> trail = new ArrayList<>();
 
@@ -23,14 +24,23 @@ public class PhysicsObject {
     basic checks done to keep logic intact
      */
     
+
     public PhysicsObject(Vector2D position, double mass){
+        this(position,mass,10);
+    }
+
+    public PhysicsObject(Vector2D position, double mass , double radius){
         if(position==null){
             throw new IllegalArgumentException("Position Cannot be Null");
         }
         if(mass<=0){
             throw new IllegalArgumentException("Mass cannot be negative");
         }
-        
+        if(radius<=0){
+            throw new IllegalArgumentException("Radius cannot be negative");
+        }
+
+        this.radius = radius;
         this.position = position;
         this.velocity = new Vector2D(0, 0);
         this.acceleration = new Vector2D(0, 0);
@@ -90,8 +100,26 @@ public class PhysicsObject {
         return mass;
     }
 
+    public double getRadius(){
+        return radius;
+    }
+
     public List<Vector2D> getTrail() {
         return trail;
+    }
+
+    public void setVelocity(Vector2D velocity) {
+        if(velocity==null){
+            throw new IllegalArgumentException("Velocity cannot be null");
+        }
+        this.velocity = velocity;
+    }
+
+    public void setPosition(Vector2D position) {
+        if(position==null){
+            throw new IllegalArgumentException("Position cannot be null");
+        }
+        this.position = position;
     }
 
     public void setFrozen(boolean frozen) {

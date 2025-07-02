@@ -38,7 +38,7 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         stage.show();
 
-        world = new World();
+        world = new World(WIDTH, HEIGHT);
 
         // Click to spawn
         canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, e -> {
@@ -61,7 +61,7 @@ public class HelloApplication extends Application {
             }
 
             // If none selected, spawn new object
-            PhysicsObject newObj = new PhysicsObject(click, 1.0);
+            PhysicsObject newObj = new PhysicsObject(click, 1.0,10);
             world.addObject(newObj);
         });
 
@@ -74,7 +74,7 @@ public class HelloApplication extends Application {
         canvas.addEventHandler(MouseEvent.MOUSE_RELEASED, e -> {
             if (isDragging && selectedObject != null && dragStart != null && dragEnd != null) {
                 // Direction: from dragEnd back to dragStart
-                Vector2D force = dragEnd.sub(dragStart).multiplyScalar(50); // scale to make force visible
+                Vector2D force = dragEnd.sub(dragStart).multiplyScalar(75); // scale to make force visible
                 selectedObject.applyForce(force);
                 selectedObject.setFrozen(false);
             }
