@@ -111,7 +111,7 @@ private void resolveCollision(PhysicsObject a,PhysicsObject b){
 
     Vector2D velA = a.getVelocity();
     Vector2D velB = b.getVelocity();
-    Vector2D relVel =  velA.sub(velB);
+    Vector2D relVel =  velB.sub(velA);
     double sepVel = relVel.dot(normal);
 
     if(sepVel>0){
@@ -126,8 +126,8 @@ private void resolveCollision(PhysicsObject a,PhysicsObject b){
     double impulseMag =  -(1+restitution)*sepVel/(1/m1 + 1/m2);
     Vector2D impulse = normal.multiplyScalar(impulseMag);
 
-    velA = velA.add(impulse.multiplyScalar(1/m1));
-    velB = velB.sub(impulse.multiplyScalar(1/m2));
+    velA = velA.sub(impulse.multiplyScalar(1/m1));
+    velB = velB.add(impulse.multiplyScalar(1/m2));
 
     Vector2D tangent = relVel.sub(normal.multiplyScalar(sepVel));
     tangent = tangent.normalize();
@@ -135,16 +135,15 @@ private void resolveCollision(PhysicsObject a,PhysicsObject b){
     double jt = -relVel.dot(tangent)/(1/m1+1/m2);
     double mu = 0.1;
 
-    Vector2D frictionImpulse = tangent.multiplyScalar(jt);
-    if(Math.abs(jt)<impulseMag*mu){
+    Vector2D frictionImpulse;
+    if(Math.abs(jt) < impulseMag * mu){
         frictionImpulse = tangent.multiplyScalar(jt);
-    }
-    else{
-        frictionImpulse = tangent.multiplyScalar(-impulseMag*mu);
+    } else {
+        frictionImpulse = tangent.multiplyScalar(impulseMag * mu * Math.signum(jt));
     }
 
-    velA = velA.add(frictionImpulse.multiplyScalar(1/m1));
-    velB = velB.sub(frictionImpulse.multiplyScalar(1/m2));
+    velA = velA.sub(frictionImpulse.multiplyScalar(1/m1));
+    velB = velB.add(frictionImpulse.multiplyScalar(1/m2));
 
     double damping = 0.999;
     velA = velA.multiplyScalar(damping);
