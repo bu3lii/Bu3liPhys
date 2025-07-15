@@ -24,6 +24,10 @@ This is a WIP 2D physics engine written in Java (planned JavaFX UI)
   - Label using arbitrary units for force
   - Coordinate Axis
 
+## Early-0.2.0 Changelog
+Border collisions are handled correctly with no issue
+Object to Object collision now works accurately as compared to Early-0.1.0, previous version had the objects simply slide against each other than continue along their way, colliding objects now actively bounce off each other
+
 ## Not Yet Implemented
 - Big Chunk of Mechanics
 - All of Electromagnetism
