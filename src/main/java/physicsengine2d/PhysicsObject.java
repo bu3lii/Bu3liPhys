@@ -1,4 +1,4 @@
-package pr.phys.physicsengine2d;
+package physicsengine2d;
 
 
 /*

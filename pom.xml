@@ -106,7 +106,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>pr.phys.physicsengine2d/pr.phys.physicsengine2d.HelloApplication</mainClass>
+                            <mainClass>pr.phys.physicsengine2d/physicsengine2d.HelloApplication</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

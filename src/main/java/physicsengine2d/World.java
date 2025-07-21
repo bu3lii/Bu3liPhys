@@ -1,8 +1,7 @@
-package pr.phys.physicsengine2d;
+package physicsengine2d;
 
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 

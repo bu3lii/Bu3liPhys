@@ -1,4 +1,4 @@
-package pr.phys.physicsengine2d;
+package physicsengine2d;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -12,7 +12,6 @@ import javafx.scene.control.Label; // For text display
 import javafx.scene.control.Slider; // For sliders
 import javafx.scene.input.KeyCode; // For key events
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox; // For horizontal layout
 import javafx.scene.layout.VBox; // For vertical layout
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font; // For font styling

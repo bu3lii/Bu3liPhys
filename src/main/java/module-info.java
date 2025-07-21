@@ -1,4 +1,4 @@
-module pr.phys.physicsengine2d {
+module physicsengine2d {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -9,6 +9,6 @@ module pr.phys.physicsengine2d {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
 
-    opens pr.phys.physicsengine2d to javafx.fxml;
-    exports pr.phys.physicsengine2d;
+    opens physicsengine2d to javafx.fxml;
+    exports physicsengine2d;
 }

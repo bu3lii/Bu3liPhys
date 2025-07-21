@@ -1,4 +1,4 @@
-package pr.phys.physicsengine2d;
+package physicsengine2d;
 
 public class Vector2D {
     public double x;
