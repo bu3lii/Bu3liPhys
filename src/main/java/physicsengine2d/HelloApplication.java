@@ -2,21 +2,30 @@ package physicsengine2d;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button; // For buttons
-import javafx.scene.control.CheckBox; // For toggles
-import javafx.scene.control.Label; // For text display
-import javafx.scene.control.Slider; // For sliders
-import javafx.scene.input.KeyCode; // For key events
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox; // For vertical layout
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font; // For font styling
+import javafx.scene.text.Font;
+import javafx.stage.FileChooser; // For file dialogs
 import javafx.stage.Stage;
 
+import com.google.gson.JsonSyntaxException; // For JSON parsing errors
+import java.io.File; // For file operations
+import java.io.IOException; // For I/O errors
 import java.util.List;
 
 public class HelloApplication extends Application {
@@ -38,17 +47,29 @@ public class HelloApplication extends Application {
     private boolean showVelocityVectors = true;
 
     private Label objectCountLabel;
+    private GraphicsContext gc;
+    private Stage primaryStage;
+    private Button pauseButton;
 
 
     private World world;
     private Canvas canvas;
+    private PersistenceManager pManager;
+
+    private Label gravityXLabel;
+    private Slider gravityXSlider;
+    private Label gravityYLabel;
+    private Slider gravityYSlider;
+    private Label speedLabel;
+    private Slider speedSlider;
 
     @Override
     public void start(Stage stage) {
-        canvas = new Canvas(WIDTH, HEIGHT);
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-
-        world = new World(WIDTH, HEIGHT);
+        this.primaryStage=stage;
+        canvas = new Canvas(WIDTH,HEIGHT);
+        gc = canvas.getGraphicsContext2D();
+        pManager = new PersistenceManager();
+        world = new World(WIDTH,HEIGHT);
 
         // UI control area (QoL stuff)
         VBox control = new VBox(10);
@@ -80,6 +101,61 @@ public class HelloApplication extends Application {
            isDragging = false;
             // also reset pause state
             isPaused = false;
+        });
+
+        // Save sim button
+        Button saveButton = new Button("Save Simulation");
+        saveButton.setOnAction(e->{
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Save Simulation");
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON Files","*.json"));
+            File file = fileChooser.showSaveDialog(primaryStage);
+
+            if(file != null){
+                try{
+                    pManager.saveSimulation(world,file); // save file as JSON in root dir
+                    System.out.println("Simulation Saved to: " + file.getAbsolutePath());
+                }
+                catch(IOException ex){
+                    System.err.println("Error while saving: " + ex.getMessage());
+                }
+            }
+        });
+
+        Button loadButton = new Button("Load Simulation");
+        loadButton.setOnAction(e->{
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Load Simulation");
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON Files","*.json"));
+            File file = fileChooser.showOpenDialog(primaryStage);
+
+            if(file!=null){
+                try{
+                    WorldState loadedState = pManager.loadSimulation(file); // read and parse JSON
+
+                    world.clearObjects();
+                    for(PhysicsObject obj : loadedState.getObjects()){
+                        world.addObject(obj);
+                    }
+                    world.setGravity(loadedState.getGravity());
+
+                    gravityXSlider.setValue(loadedState.getGravity().x);
+                    gravityYSlider.setValue(loadedState.getGravity().y);
+                    simSpeedMultiplier=1.0;
+                    speedSlider.setValue(simSpeedMultiplier);
+
+                    System.out.println("Save Loaded from: " + file.getAbsolutePath());
+                }
+                catch (IOException ex){
+                    System.err.println("Error reading file: " + ex.getMessage());
+                }
+                catch (JsonSyntaxException ex){
+                    System.err.println("Error parsing JSON: Invalid JSON format. " + ex.getMessage());
+                }
+                catch (Exception ex){
+                    System.err.println("Unexpected Error: " + ex.getMessage());
+                }
+            }
         });
 
         // gravity x slider
@@ -147,6 +223,8 @@ public class HelloApplication extends Application {
                 new Label("Simulation Controls"),
                 pauseButton,
                 resetButton,
+                saveButton,
+                loadButton,
                 gravityXLabel,
                 gravityXSlider,
                 gravityYLabel,

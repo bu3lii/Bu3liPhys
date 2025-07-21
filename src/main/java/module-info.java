@@ -8,7 +8,8 @@ module physicsengine2d {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires com.google.gson;
 
-    opens physicsengine2d to javafx.fxml;
+    opens physicsengine2d to javafx.fxml, com.google.gson;
     exports physicsengine2d;
 }
