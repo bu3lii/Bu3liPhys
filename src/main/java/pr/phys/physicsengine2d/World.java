@@ -49,7 +49,7 @@ public List<PhysicsObject> getObjects(){
 }
 
 public void setGravity(Vector2D g){
-    if(gravity==null){
+    if(g==null){
         throw new IllegalArgumentException("Gravity Cannot be Null");
     }
     gravity = g;
@@ -57,6 +57,10 @@ public void setGravity(Vector2D g){
 
 public Vector2D getGravity(){
     return new Vector2D(gravity.x, gravity.y);
+}
+
+public void clearObjects(){
+    objects.clear();
 }
 
 private void handleBorderCollision(PhysicsObject obj){
