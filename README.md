@@ -61,7 +61,7 @@ Early Work in Progress
 - Implementation of additional physics mechanics.
 
 ## Code is located in
-`src/main/java/pr/phys/physicsengine2d`
+`src/main/java/physicsengine2d`
 Main Class: **HelloApplication.java**
 
 *There is no standalone executable yet as this project is under active development.*
