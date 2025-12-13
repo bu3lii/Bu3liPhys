@@ -1,6 +1,8 @@
-# Java 2D Physics Engine
+# Java 2D Physics Engine 
 
 This is a Work-In-Progress (WIP) 2D physics engine written in Java utilizing JavaFX for its graphical user interface.
+
+## UPDATE: Discontinued, java is not really the right tool for this and developing became a hassle
 
 ## Current Version
 **0.2.6**
